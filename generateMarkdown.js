@@ -1,41 +1,88 @@
-// Creating a function that returns a license badge based on which license is passed in
+// Create a function that returns a license badge based on which license is passed in
+// If there is no license, return an empty string
 function renderLicenseBadge(license) {
-  if (license !== "none") {
-    return `![Github license](https://img.shields.io/badge/license-${license}-blue.svg)`;
+  if (license !== 'None') {
+    return `![GitHub license](https://img.shields.io/badge/license-${license}-blue.svg)`;
   }
-  return "";
+  return '';
 }
 
-//Creating a function to generate markdown for README
+// Create a function that returns the license link
+// If there is no license, return an empty string
+function renderLicenseLink(license) {
+  if (license !== 'None') {
+    return `\n* [License](#license)\n`;
+  }
+  return '';
+}
+
+// Create a function that returns the license section of README
+// If there is no license, return an empty string
+function renderLicenseSection(license) {
+  if (license !== 'None') {
+    return `## License
+
+This project is licensed under the ${license} license.`;
+  }
+  return '';
+}
+
+// Create a function to generate markdown for README
 function generateMarkdown(data) {
-  return `# ${data.title} 
+  return `# ${data.title}
 ${renderLicenseBadge(data.license)}
+
 ## Description
+
 ${data.description}
-## Deployed Application URL
-${data.link}
-## Screenshot
-![alt-text](${data.screenshot})
-## Table of Contents
-* [Features](#features)
-* [Languages & Dependencies](#languagesanddependencies)
-* [How to Use This Application](#HowtoUseThisApplication)
-* [Contributors](#contributors)
-* [Testing](#testing)
+
+## Table of Contents 
+
+* [Installation](#installation)
+
+* [Usage](#usage)
+${renderLicenseLink(data.license)}
+* [Contributing](#contributing)
+
+* [Tests](#tests)
+
 * [Questions](#questions)
-## Features
-${data.features}
-## Languages & Dependencies
-${data.require}
-## How to Use This Application:
+
+## Installation
+
+To install necessary dependencies, run the following command:
+
+\`\`\`
+${data.installation}
+\`\`\`
+
+## Usage
+
 ${data.usage}
-## Contributors
-${data.contributors}
-## Testing
+
+${renderLicenseSection(data.license)}
+  
+## Contributing
+
+${data.contributing}
+
+## Tests
+
+To run tests, run the following command:
+
+\`\`\`
 ${data.test}
+\`\`\`
+
 ## Questions
-Please send your questions [here](mailto:${data.email}?subject=[GitHub]%20Dev%20Connect) or visit [github/${data.creator}](https://github.com/${data.creator}).
+
+If you have any questions about the repo, open an issue or contact me directly at ${
+    data.email
+  }. You can find more of my work at [${data.github}](https://github.com/KingCamrin${
+    data.github
+  }/).
+
 `;
 }
 
-module.exports = generateMarkdown;
+export default generateMarkdown;
